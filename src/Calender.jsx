@@ -64,15 +64,14 @@ export default class Calender extends Component {
     for (let d = daysFromPreviousMonth; d > (daysFromPreviousMonth - startDayOfMonth); d--) {
       pastDays.push(d)
     }
-    this.offsetStartDays.push(pastDays.reverse())
+    this.offsetStartDays.push(...pastDays.reverse())
 
   }
   offsetEndingDays (totalCalendarColumn, columnFilledInDate) {
-    // this.offsetStartDays = []
-    // let futureDays = []
-    // for (let d = columnFilledInDate; d < totalCalendarColumn; d++) {
-    //   this.offsetStartDays.push(d)
-    // }
+    this.offsetEndDays = []
+    for (let d = 1; d <= (totalCalendarColumn - columnFilledInDate); d++) {
+      this.offsetEndDays.push(d)
+    }
     
   }
   calculateTimeIntervalInDay(fromdate, todate) {
@@ -167,12 +166,11 @@ export default class Calender extends Component {
     }
     // offset starting days
     this.offsetStartingDays(firstDayofMonth)
-    console.log(this.offsetStartDays)
     calendarDays.push(...this.offsetStartDays)
     calendarDays.push(...this.daysOfCurrentMonths)
     // offset ending days
-    this.offsetEndingDays(this.TOTAL_CALENDAR_GRID)
-
+    this.offsetEndingDays(this.TOTAL_CALENDAR_GRID, calendarDays.length)
+    calendarDays.push(...this.offsetEndDays)
     return calendarDays
   }
 
