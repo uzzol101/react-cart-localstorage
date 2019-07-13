@@ -62,7 +62,11 @@ export default class Calender extends Component {
     ).getDate()
     
     for (let d = daysFromPreviousMonth; d > (daysFromPreviousMonth - startDayOfMonth); d--) {
-      pastDays.push(d)
+      pastDays.push(
+        <div className="day gray-out">
+          <span>{d}</span>
+        </div>
+      )
     }
     this.offsetStartDays.push(...pastDays.reverse())
 
@@ -70,7 +74,11 @@ export default class Calender extends Component {
   offsetEndingDays (totalCalendarColumn, columnFilledInDate) {
     this.offsetEndDays = []
     for (let d = 1; d <= (totalCalendarColumn - columnFilledInDate); d++) {
-      this.offsetEndDays.push(d)
+      this.offsetEndDays.push(
+        <div className="day gray-out">
+        <span>{d}</span>
+      </div>
+      )
     }
     
   }
@@ -161,7 +169,7 @@ export default class Calender extends Component {
       1
     ).getDay();
     // days of this current month
-    for (let day = 1; day < numOfDays; day++) {
+    for (let day = 1; day <= numOfDays; day++) {
       this.daysOfCurrentMonths.push(day)
     }
     // offset starting days
@@ -239,7 +247,7 @@ export default class Calender extends Component {
         {days.map((day, index) => (
           <div
             key={index}
-            className={this.prepareCalenderClassList(day)}
+            className="day"
             onClick={() => this.onDaySelect(day)}
           >
             {day}{this.disabledDaysList.includes(day)? <div>D</div>:  ""}
