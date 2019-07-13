@@ -49,6 +49,7 @@ export default class Cart extends Component {
     }
     componentWillUnmount () {
         window.removeEventListener('beforeunload', this.saveToLocalStorage)
+        this.saveToLocalStorage()
     }
     
     handleChange(value, name ){
